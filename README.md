@@ -6,11 +6,11 @@ Sending messages from group to group in Telegram using a user and not a bot
 ## installation
 You must install telethon and asyncio to use this script
 ```
-$ sudo apt install python3-telethon python3-asyncio
+$ sudo apt install python3-telethon
 ```
 OR
 ```
-$ python3 -m pip install telethon asyncio
+$ python3 -m pip install telethon
 ```
 
 ## how to use
