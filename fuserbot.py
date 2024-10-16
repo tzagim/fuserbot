@@ -111,5 +111,5 @@ if __name__ == '__main__':
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        logging.info("Bot stopped by user.")
+        logging.warning("Bot stopped by user.")
         forwarded_messages.clear()  # Clear forwarded messages on shutdown
