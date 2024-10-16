@@ -1,5 +1,5 @@
 # fuserbot
-Sending messages from group to group in Telegram using a user and not a bot.
+Sending messages from group to group in Telegram using a user and not a bot, the main difference between a user and a bot is the ability to edit messages.
 
 **If you want to send messages through a bot, use: [tzbot](https://github.com/tzagim/tzbot)**
 
@@ -14,7 +14,7 @@ $ python3 -m pip install telethon
 ```
 
 ## how to use
-+ First, to get the required parameters, go to [telogin](https://github.com/tzagim/telogin)
++ First, to get the required parameters, to get them go to [telogin](https://github.com/tzagim/telogin)
 + Rename the generated file to `fuserbot_config.json`. (It should be in the format of `example_fuserbot_config.json`).
 + Create the file `chats.json` according to the format found in `example_chats.json`
 + Download `fuserbot.py`
