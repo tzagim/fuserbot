@@ -56,6 +56,25 @@ async def process_queue(original_message_text, media, destinations, original_mes
             async with lock:
                 forwarded_messages[original_message_id] = (sent_message.id, destination, time.time())
 
+def passes_filters(text, filters):
+    text = text or ""
+    required = filters.get("required", [])
+    any_words = filters.get("any", [])
+    blacklist = filters.get("blacklist", [])
+    # blacklist
+    for bad in blacklist:
+        if bad in text:
+            return False
+    # required
+    for word in required:
+        if word not in text:
+            return False
+    # any
+    if any_words and not any(word in text for word in any_words):
+        return False
+    return True
+
+
 async def main():
     await client.start()
     logging.info("Forward started")
@@ -88,9 +107,14 @@ async def main():
         for config in chat_config:
             if str(config["source"]) == str(source_chat):
                 destinations = config.get("destination", [])
-
-                original_message_text = event.message.text
+                filters = config.get("filters", {})
+                original_message_text = event.message.text or ""
                 original_message_id = event.message.id
+
+                # Check filters
+                if not passes_filters(original_message_text, filters):
+                    logging.debug(f"Message skipped due to filters in chat {source_chat}")
+                    return
 
                 if event.message.reply_to_msg_id:
                     original_message = await event.get_reply_message()
@@ -100,6 +124,7 @@ async def main():
                             f"Replying to {original_sender}: {original_message.text}\n\n{original_message_text}"
                         )
                 await process_queue(original_message_text, event.message.media, destinations, original_message_id)
+
 
     @client.on(events.MessageEdited)
     async def edit_handler(event):
