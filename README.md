@@ -1,5 +1,5 @@
 # fuserbot
-Sending messages from group to group in Telegram using a user and not a bot, the main difference between a user and a bot is the ability to edit messages.
+Sending messages from one Telegram group to another using a user account instead of a bot is possible. The main difference between a user and a bot is that bots have stricter limitations.
 
 **If you want to send messages through a bot, use: [tzbot](https://github.com/tzagim/tzbot)**
 
